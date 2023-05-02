@@ -1,0 +1,40 @@
+#Firstly create a user from IAM and then create access key and secret key
+
+provider "aws" {
+  access_key = "put your access key here"
+  secret_key = "put your secret key here"
+  region     = "us-east-1"  #Select region where we want to create instance
+}
+
+resource "aws_vpc" "example" {
+  cidr_block = "10.0.0.0/16"
+}
+
+resource "aws_subnet" "example" {
+  vpc_id     = aws_vpc.example.id
+  cidr_block = "10.0.16.0/20"
+}
+
+resource "aws_security_group" "instance" {
+  name_prefix = "instance_sg"
+  vpc_id      = aws_vpc.example.id
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "example" {
+  ami                    = "ami-02396cdd13e9a1257"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.example.id
+  vpc_security_group_ids = [aws_security_group.instance.id]
+
+  tags = {
+    Name = "example-instance"  #name of ec2-instance
+  }
+}
+
+Note= If VPC error is shown then above code help you

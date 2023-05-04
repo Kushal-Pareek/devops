@@ -1,0 +1,36 @@
+# Step 1
+Firstly create EC2 instance in AWS and using Ubuntu OS as default and leave the other details as it is.
+Then in the end of creting a EC2 instance, add script under "Additional settings".
+<-----Script----->
+#!/bin/bash
+sudo apt update	
+sudo apt install apache2 -y
+apache2 -version
+sudo systemctl status apache2
+<------End------->
+Then launch the instance and connect it.
+
+# Step 2
+Run the below command after connecting ec2 instance to create apache2 server
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl status apache2
+
+Then run these commands
+curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+sudo apt install python2.7
+
+# Step 3
+Create a IAM user with permissions like "Cloud Watch Full Access", "Administration access" and "CloudwatchAgentServerPolicy".
+Then run the command ---> sudo python2.7 ./awslogs-agent-setup.py --region us-east-1
+The above command take access key and secret key of IAM user which we have created.So, paste the access and secret key.
+Then just click "ENTER" and complete the process.
+
+# Step 4
+Run ---> cat /var/awslogs/etc/awslogs.conf
+To see logs of instances in terminal, run ---> cat awslogs.log
+
+# Step 5
+Finally, the task is completed.We can see live logs in cloudwatch-->logs.
+
+<-------HAPPY LEARNING------->

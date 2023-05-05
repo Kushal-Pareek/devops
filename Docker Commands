@@ -1,0 +1,33 @@
+docker version  ---> It will give version of docker installed in our local machine.
+
+docker images   ---> This gives the list of docker images
+
+docker ps       ---> It gives the list of all running containers
+
+docker ps -a    ---> It gives the list of all the containers
+
+docker pull ubuntu:latest ---> This command pulls the image of ubuntu from docker hub in our local machine
+
+docker run -it ubuntu:latest  ---> This command firstly pulls the ubuntu latest version image from docker hub and then run the image.'-it' is used for interaction with image.
+Note:-When we run a image, then the new container is formed for the image.
+
+docker exec -it container_id bash   ---> Before this command, firstly start the docker container by using "docker start container_name".Then given command works.
+
+docker run --name kushalcontainer -it -d image_id  ---> Run the image and create a conatiner with the name of "kushalcontainer".
+This create the interactive shell of conatiner which can be accessed through docker exec command.
+
+docker run --name kushalcontainer -it -p 8081:80 image_name  ---> This command make conatiner of image and map the port 8081 of our local machine with port 80.
+Type localhost:8081 to run server.
+
+docker stop container_name ---> This is used to stop the running conatiners
+
+docker rm -f container_id  ---> it delete forcefully to the container due to -f.
+docker rmi image_id ---> delete the image.
+
+docker ps -aq ---> This command gives the id's of all the containers.
+docker rm $(docker ps -aq)  ---> This is used to delete all the containers(excited and stopped both) in one go.
+
+docker container prune ---> This command is used to delete all stopped containers.
+
+docker rmi $(docker images -q)  ---> Delete all the images
+

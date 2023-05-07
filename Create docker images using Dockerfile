@@ -1,0 +1,20 @@
+Firstly run 'docker images' command to see the list of all available commands.
+Then create a folder with any name like "game" and then go to CMD or powershell and run 'code .' command.
+The above step open the VsCode.Then create Dockerfile.
+
+In the docker file we write commands like 
+<----example--->
+FROM nginx:latest   #base image
+COPY . /usr/share/nginx/html  #copy content from current folder to nginx html page
+<-----end------->
+
+Open the terminal and run the below commands
+$ docker build -t game .
+$ docker tag game kushalpareek/game
+$ docker login
+$ docker push kushalpareek/game
+$ docker run --name "kp" -p 27017 kushalpareek/game
+
+
+NOTE :- If someone wants to download the image then run
+$docker pull kushalpareek/game  

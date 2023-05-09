@@ -1,0 +1,26 @@
+Firstly go to vs code and create a folder and then create a file "Dockerfile".
+NOTE:- The name of file is depends on user
+
+Secondly,If we want to create CPP compiler using gcc then we use the below code
+<-----Start----->
+# gcc as base image
+FROM gcc:latest
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY ./code.cpp /app
+
+# Compile the C++ program using gcc
+RUN g++ -o myprogram code.cpp
+
+CMD ["./myprogram"]
+
+<-------End-------->
+NOTE:- We can take code from Docker hub.
+
+At the end,RUN below commands
+$ docker build -t <name_of_image> -f <name_of_currentdirectory> .        # if name of directory is not "Dockerfile"
+$ docker run -itd <name_of_image>
+$ docker exec -itd <id_of_container> <command_of_container>
